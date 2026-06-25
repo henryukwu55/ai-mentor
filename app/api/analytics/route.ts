@@ -41,8 +41,8 @@ export async function GET() {
     }));
 
     return NextResponse.json({ sessions: enriched });
-  } catch (err: any) {
+  } catch (err: unknown) {
     console.error("/api/analytics error:", err);
-    return NextResponse.json({ error: err.message ?? "Internal error" }, { status: 500 });
+    return NextResponse.json({ error: err instanceof Error ? err.message : "Internal error" }, { status: 500 });
   }
 }

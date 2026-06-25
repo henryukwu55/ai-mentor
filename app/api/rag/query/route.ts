@@ -9,8 +9,8 @@ export async function POST(req: NextRequest) {
     }
     const results = await retrieveContext(query, k ?? 4);
     return NextResponse.json({ results });
-  } catch (err: any) {
+  } catch (err: unknown) {
     console.error("/api/rag/query error:", err);
-    return NextResponse.json({ error: err.message ?? "Internal error" }, { status: 500 });
+    return NextResponse.json({ error: err instanceof Error ? err.message : "Internal error" }, { status: 500 });
   }
 }

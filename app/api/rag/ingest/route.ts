@@ -24,8 +24,8 @@ export async function POST(req: NextRequest) {
     if (error) throw error;
 
     return NextResponse.json({ id: data.id });
-  } catch (err: any) {
+  } catch (err: unknown) {
     console.error("/api/rag/ingest error:", err);
-    return NextResponse.json({ error: err.message ?? "Internal error" }, { status: 500 });
+    return NextResponse.json({ error: err instanceof Error ? err.message : "Internal error" }, { status: 500 });
   }
 }

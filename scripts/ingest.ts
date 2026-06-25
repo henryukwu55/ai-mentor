@@ -9,7 +9,10 @@
 import fs from "node:fs";
 import path from "node:path";
 import { createClient } from "@supabase/supabase-js";
-import "dotenv/config";
+// Load .env.local first (Next.js convention), then .env as fallback.
+import { config } from "dotenv";
+config({ path: ".env.local" });
+config({ path: ".env" });
 
 const SUPABASE_URL = process.env.NEXT_PUBLIC_SUPABASE_URL!;
 const SERVICE_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY!;

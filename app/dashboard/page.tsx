@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Link from "next/link";
 
 type SessionRow = {
   id: string;
@@ -50,6 +51,15 @@ export default function DashboardPage() {
 
   return (
     <main className="min-h-screen p-6 max-w-5xl mx-auto">
+      <div className="flex items-center justify-between mb-6">
+        <Link href="/" className="text-slate-400 hover:text-slate-200 text-sm">← Home</Link>
+        <button
+          onClick={() => window.location.reload()}
+          className="text-xs px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 border border-slate-700 transition"
+        >
+          ↻ Refresh
+        </button>
+      </div>
       <h1 className="text-2xl font-bold mb-1">Mentor Analytics</h1>
       <p className="text-slate-400 text-sm mb-6">
         Recent sessions, with average visual-sentiment signal captured during each conversation

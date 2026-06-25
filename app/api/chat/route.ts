@@ -59,8 +59,8 @@ If frustration is high, slow down and simplify. If engagement is low, re-energiz
     }
 
     return NextResponse.json({ reply, context });
-  } catch (err: any) {
+  } catch (err: unknown) {
     console.error("/api/chat error:", err);
-    return NextResponse.json({ error: err.message ?? "Internal error" }, { status: 500 });
+    return NextResponse.json({ error: err instanceof Error ? err.message : "Internal error" }, { status: 500 });
   }
 }

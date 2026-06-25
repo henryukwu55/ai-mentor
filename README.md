@@ -21,16 +21,16 @@ stack:
 
 ## Stack
 
-| Layer                   | Tech                                                                                      | Why                                                                                                                                                |
-| ----------------------- | ----------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Frontend                | Next.js 14 (App Router) + Tailwind                                                        | React-based, fast, free                                                                                                                            |
-| LLM ("the brain")       | [Ollama](https://ollama.com) running Llama 3.1                                            | Open source, runs locally, no API key                                                                                                              |
-| Speech-to-text          | [Transformers.js](https://huggingface.co/docs/transformers.js) (Whisper-tiny, in-browser) | Open source, runs client-side, no server cost                                                                                                      |
-| Text-to-speech          | Browser `SpeechSynthesis` API                                                             | Free, zero setup. Swap for [Piper](https://github.com/rhasspy/piper) or [Coqui TTS](https://github.com/coqui-ai/TTS) server-side for custom voices |
-| Webcam sentiment        | [face-api.js](https://github.com/justadudewhohacks/face-api.js)                           | Open source (MIT), runs fully client-side, no frames leave the browser                                                                             |
-| Avatar                  | Hand-rolled SVG, no model weights                                                         | Zero dependency, works everywhere, easy to restyle                                                                                                 |
-| Database + vector store | [Supabase](https://supabase.com) Postgres + pgvector                                      | Open source (self-hostable) or free tier                                                                                                           |
-| RAG embeddings          | Ollama `nomic-embed-text`                                                                 | Open source, local                                                                                                                                 |
+| Layer | Tech | Why |
+|---|---|---|
+| Frontend | Next.js 14 (App Router) + Tailwind | React-based, fast, free |
+| LLM ("the brain") | [Ollama](https://ollama.com) running Llama 3.1 | Open source, runs locally, no API key |
+| Speech-to-text | [Transformers.js](https://huggingface.co/docs/transformers.js) (Whisper-tiny, in-browser) | Open source, runs client-side, no server cost |
+| Text-to-speech | Browser `SpeechSynthesis` API | Free, zero setup. Swap for [Piper](https://github.com/rhasspy/piper) or [Coqui TTS](https://github.com/coqui-ai/TTS) server-side for custom voices |
+| Webcam sentiment | [face-api.js](https://github.com/justadudewhohacks/face-api.js) | Open source (MIT), runs fully client-side, no frames leave the browser |
+| Avatar | Hand-rolled SVG, no model weights | Zero dependency, works everywhere, easy to restyle |
+| Database + vector store | [Supabase](https://supabase.com) Postgres + pgvector | Open source (self-hostable) or free tier |
+| RAG embeddings | Ollama `nomic-embed-text` | Open source, local |
 
 ## Prerequisites
 
@@ -74,14 +74,33 @@ This enables `pgvector` and creates `students`, `sessions`, `messages`,
 
 ### 2. (Optional) Seed the knowledge base
 
-Drop `.md`/`.txt` files into `scripts/knowledge-base/` (a sample Stripe
-debugging brief is included), then:
+A ready-to-go curriculum knowledge base is included in `scripts/knowledge-base/`.
+Drop any additional `.md`/`.txt` files there, then run:
 
 ```bash
 npm run ingest
 ```
 
-This embeds each file with Ollama and stores it in `documents` for RAG.
+This embeds each file with Ollama and stores it in the `documents` table for RAG.
+The mentor will draw on these during conversations.
+
+**Files included out of the box:**
+
+| File | Contents |
+|------|----------|
+| `javascript-typescript-debugging.md` | TypeError, async/await mistakes, stale closures, debugging strategies |
+| `react-nextjs-guide.md` | Rules of Hooks, useState/useEffect pitfalls, hydration errors, Next.js env vars |
+| `databases-sql-guide.md` | SQL fundamentals, N+1 problem, Supabase RLS, pgvector, indexing |
+| `rest-api-design.md` | HTTP methods, status codes, REST URL design, CORS, JWT, validation |
+| `git-workflow.md` | Feature branch workflow, commit conventions, merge conflicts, undoing mistakes |
+| `system-design-fundamentals.md` | Load balancers, caching, queues, CAP theorem, how to approach design questions |
+| `oral-defense-preparation.md` | What panelists look for, common questions, handling pressure, practice tips |
+| `student-project-briefs.md` | Task manager, real-time chat, e-commerce store — briefs + common errors |
+| `professional-soft-skills.md` | Code review etiquette, estimating, asking for help, agile basics |
+| `python-debugging-guide.md` | Python errors, FastAPI patterns, virtual environments, type hints |
+| `deployment-guide.md` | Vercel/Railway/VPS deployment, Ollama server setup, common deploy failures |
+| `data-structures-algorithms.md` | Big O, arrays, sorting, two-pointer, BFS/DFS, interview approach |
+| `example-project-brief.md` | Stripe API integration debugging (original sample) |
 
 ### 3. (Optional) Enable webcam sentiment (Phase 2)
 

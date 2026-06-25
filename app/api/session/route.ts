@@ -35,8 +35,8 @@ export async function POST(req: NextRequest) {
     if (sessionErr) throw sessionErr;
 
     return NextResponse.json({ sessionId: session.id, studentId: student.id });
-  } catch (err: any) {
+  } catch (err: unknown) {
     console.error("/api/session error:", err);
-    return NextResponse.json({ error: err.message ?? "Internal error" }, { status: 500 });
+    return NextResponse.json({ error: err instanceof Error ? err.message : "Internal error" }, { status: 500 });
   }
 }
