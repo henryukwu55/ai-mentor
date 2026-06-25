@@ -1,0 +1,8 @@
+# Stop everything
+kill task via task manager
+
+# Start with tinyllama and CPU
+set OLLAMA_NUM_GPU=0 && set OLLAMA_CONTEXT_LENGTH=512 && ollama serve
+
+
+npm run dev

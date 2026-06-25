@@ -3,7 +3,7 @@
 // Run `ollama pull llama3.1` and `ollama pull nomic-embed-text` before use.
 
 const BASE_URL = process.env.OLLAMA_BASE_URL || "http://localhost:11434";
-const CHAT_MODEL = process.env.OLLAMA_CHAT_MODEL || "llama3.2:1b";
+const CHAT_MODEL = process.env.OLLAMA_CHAT_MODEL || "tinyllama";
 const EMBED_MODEL = process.env.OLLAMA_EMBED_MODEL || "nomic-embed-text";
 const TIMEOUT_MS = 60_000; // 60 s — generous for cold-start local models
 
